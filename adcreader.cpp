@@ -166,7 +166,7 @@ void ADCreader::run()
 	running = true; 
 	while (running) {
 		
-	  	writeReg(fd,rd);
+	  	writeReg(fd,rdch);
 	  	ret = gpio_poll(sysfs_fd,1000);
 	  	if (ret<1) {
 	    		fprintf(stderr,"Poll error %d\n",ret);
