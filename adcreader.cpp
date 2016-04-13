@@ -90,7 +90,7 @@ static int readData(int fd)
 	return (rx1[0]<<8)|(rx1[1]);
 }
 
-ADCreader::ADCreader(){
+ADCreader::ADCreader(uint8_t init1){
 	
 	ret = 0;
 	
@@ -176,7 +176,7 @@ void ADCreader::run()
 	running = true; 
 	while (running) {
 		
-	  	writeReg(fd,0x38);
+	  	writeReg(fd,init1);
 	  	ret = gpio_poll(sysfs_fd,1000);
 	  	if (ret<1) {
 	    		fprintf(stderr,"Poll error %d\n",ret);
