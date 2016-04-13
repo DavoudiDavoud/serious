@@ -76,20 +76,36 @@ void Window::ch1bc(void){
 	chnum = 0;
     	label->setText("channel0");
     	killTimer(id);
+    	//adc deleting
+    	adcreader->quit();
+	// wait until the run method has terminated
+	adcreader->wait();
+	delete adcreader;
+	//new adc
+	adcreader = new ADCreader(0x38);
+	adcreader->start();
+	
     	id = startTimer(40);
 	}
 	else{
 	chnum = 1;
 	label->setText("channel1");
 	killTimer(id);
+	//adc deleting
+    	adcreader->quit();
+	// wait until the run method has terminated
+	adcreader->wait();
+	delete adcreader;
+	//new adc
+	adcreader = new ADCreader(0x39);
+	adcreader->start();
+	
 	id = startTimer(40);
 	}
 }
 
 double Window::opch(bool ch, int c){
-	if (ch)
-		return ((double) 2*(adcreader->dat));
-	else 
-		return ((double) 1*(adcreader->dat));
+	return ((double) 1*(adcreader->dat));
+	
 	
 }
