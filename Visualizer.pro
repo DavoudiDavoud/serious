@@ -8,8 +8,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = Visualizer
  
-LIBS += -lqwt -lm 
+LIBS += -lqwt -lm -lbcm2835 -lrt
 
-HEADERS += window.h  adcreader.h 
+HEADERS += window.h gz_clk.h adcreader.h gpio-sysfs.h
 
-SOURCES += main.cpp window.cpp  adcreader.cpp 
+SOURCES += main.cpp window.cpp gz_clk.cpp adcreader.cpp gpio-sysfs.cpp
