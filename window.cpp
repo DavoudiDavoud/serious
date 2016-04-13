@@ -88,8 +88,8 @@ void Window::ch1bc(void){
 
 double Window::opch(bool ch, int c){
 	if (ch)
-		return cos( M_PI * c/50.0 );
+		return ((double) 2*(adcreader->dat));
 	else 
-		return sin( M_PI * c/50.0 );
+		return ((double) 1*(adcreader->dat));
 	
 }
