@@ -4,28 +4,15 @@
 #include <cmath>  // for sine stuff
 
 
-Window::Window() : gain(5), count(0)
+Window::Window() : count(0)
 {
-	knob = new QwtKnob;
-	// set up the gain knob
-	knob->setValue(gain);
-
-	// use the Qt signals/slots framework to update the gain -
-	// every time the knob is moved, the setGain function will be called
-	connect( knob, SIGNAL(valueChanged(double)), SLOT(setGain(double)) );
-
-	// set up the thermometer
-	thermo = new QwtThermo; 
-	thermo->setFillBrush( QBrush(Qt::red) );
-	thermo->setRange(0, 20);
-	thermo->show();
-
+	
 
 	// set up the initial plot data
 	for( int index=0; index<plotDataSize; ++index )
 	{
 		xData[index] = index;
-		yData[index] = gain * sin( M_PI * index/50 );
+		yData[index] = sin( M_PI * index/50 );
 	}
 
 	curve = new QwtPlotCurve;
@@ -38,14 +25,9 @@ Window::Window() : gain(5), count(0)
 	plot->show();
 
 
-	// set up the layout - knob above thermometer
-	vLayout = new QVBoxLayout;
-	vLayout->addWidget(knob);
-	vLayout->addWidget(thermo);
 
 	// plot to the left of knob and thermometer
 	hLayout = new QHBoxLayout;
-	hLayout->addLayout(vLayout);
 	hLayout->addWidget(plot);
 
 	setLayout(hLayout);
@@ -69,7 +51,7 @@ Window::~Window() {
 
 void Window::timerEvent( QTimerEvent * )
 {
-	double inVal = gain * sin( M_PI * count/50.0 );
+	double inVal = sin( M_PI * count/50.0 );
 	++count;
 
 	// add the new input to the plot
@@ -78,14 +60,7 @@ void Window::timerEvent( QTimerEvent * )
 	curve->setSamples(xData, yData, plotDataSize);
 	plot->replot();
 
-	// set the thermometer value
-	thermo->setValue( inVal + 10 );
+
 }
 
 
-// this function can be used to change the gain of the A/D internal amplifier
-void Window::setGain(double gain)
-{
-	// for example purposes just change the amplitude of the generated input
-	this->gain = gain;
-}
