@@ -6,7 +6,8 @@
 class ADCreader : public QThread
 {
 public:
-	ADCreader();
+	ADCreader(uint8_t init1);
+	uint8_t rdch;
 	void quit();
 	void run();
 	int dat;
