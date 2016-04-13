@@ -5,6 +5,10 @@
 #include <qwt/qwt_plot.h>
 #include <qwt/qwt_plot_curve.h>
 
+#include <QApplication>
+#include <QLabel>
+#include <QPushButton>
+
 #include <QBoxLayout>
 
 #include "adcreader.h"
@@ -16,18 +20,23 @@ class Window : public QWidget
 	Q_OBJECT
 
 public:
+	int id;
+	double opch(bool ch,int c);
 	Window(); // default constructor - called when a Window is declared without arguments
-
 	~Window();
-
 	void timerEvent( QTimerEvent * );
-
+	
+public slots:
+	void ch1bc(void);
 
 // internal variables for the window class
 private:
 	
 	QwtPlot      *plot;
 	QwtPlotCurve *curve;
+	
+	QLabel *label;
+	QPushButton *ch1b;
 
 	// layout elements from Qt itself http://qt-project.org/doc/qt-4.8/classes.html
 	QVBoxLayout  *vLayout;  // vertical layout
@@ -41,6 +50,7 @@ private:
 
 
 	int count;
+	bool chnum;
 
 	ADCreader *adcreader;
 };
