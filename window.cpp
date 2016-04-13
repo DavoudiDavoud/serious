@@ -6,7 +6,13 @@
 
 Window::Window() : count(0)
 {
-	
+	chnum = 0;
+	// set up labels
+	label = new QLabel("Channel0");
+	label->show();
+	// set up button
+	ch1b = new QPushButton("switch channel");
+	connect(ch1b, SIGNAL(clicked()), SLOT(ch1bc()));
 
 	// set up the initial plot data
 	for( int index=0; index<plotDataSize; ++index )
@@ -28,6 +34,8 @@ Window::Window() : count(0)
 
 	// plot to the left of knob and thermometer
 	hLayout = new QHBoxLayout;
+	hLayout->addWidget(ch1b);
+	hLayout->addWidget(label)
 	hLayout->addWidget(plot);
 
 	setLayout(hLayout);
@@ -51,7 +59,7 @@ Window::~Window() {
 
 void Window::timerEvent( QTimerEvent * )
 {
-	double inVal = sin( M_PI * count/50.0 );
+	double inVal = opch(chnum,count);
 	++count;
 
 	// add the new input to the plot
@@ -63,4 +71,25 @@ void Window::timerEvent( QTimerEvent * )
 
 }
 
+void Window::ch1bc(void){
+	if(chnum){
+	chnum = 0;
+    	label->setText("channel0");
+    	killTimer(id);
+    	id = startTimer(40);
+	}
+	else{
+	chnum = 1;
+	label->setText("channel1");
+	killTimer(id);
+	id = startTimer(40);
+	}
+}
 
+double Window::opch(bool ch, int c){
+	if (ch)
+		return cos( M_PI * c/50.0 );
+	else 
+		return sin( M_PI * c/50.0 );
+	
+}
