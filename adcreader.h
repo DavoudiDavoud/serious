@@ -2,15 +2,23 @@
 #define ADCREADER
 
 #include <QThread>
-
+ 
 class ADCreader : public QThread
 {
 public:
-	ADCreader() {running = 0;};
+	ADCreader();
 	void quit();
 	void run();
-private:
-	bool running;
+	int dat;
+	
+	
+	int ret;
+	int fd;
+	int sysfs_fd;
+	bool running; 
+	int no_tty;
+	
+
 
 };
 
