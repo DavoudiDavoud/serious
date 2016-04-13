@@ -76,30 +76,14 @@ void Window::ch1bc(void){
 	chnum = 0;
     	label->setText("channel0");
     	killTimer(id);
-    	//adc deleting
-    	adcreader->quit();
-	// wait until the run method has terminated
-	adcreader->wait();
-	delete adcreader;
-	//new adc
-	adcreader = new ADCreader(0x38);
-	adcreader->start();
-	
+	adcreader->rdch = 0x38;
     	id = startTimer(40);
 	}
 	else{
 	chnum = 1;
 	label->setText("channel1");
 	killTimer(id);
-	//adc deleting
-    	adcreader->quit();
-	// wait until the run method has terminated
-	adcreader->wait();
-	delete adcreader;
-	//new adc
-	adcreader = new ADCreader(0x39);
-	adcreader->start();
-	
+	adcreader->rdch = 0x39;
 	id = startTimer(40);
 	}
 }
