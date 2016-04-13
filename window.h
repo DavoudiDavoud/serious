@@ -1,8 +1,7 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
-#include <qwt/qwt_thermo.h>
-#include <qwt/qwt_knob.h>
+
 #include <qwt/qwt_plot.h>
 #include <qwt/qwt_plot_curve.h>
 
@@ -28,8 +27,7 @@ public slots:
 
 // internal variables for the window class
 private:
-	QwtKnob      *knob;
-	QwtThermo    *thermo;
+	
 	QwtPlot      *plot;
 	QwtPlotCurve *curve;
 
@@ -43,7 +41,7 @@ private:
 	double xData[plotDataSize];
 	double yData[plotDataSize];
 
-	double gain;
+
 	int count;
 
 	ADCreader *adcreader;
