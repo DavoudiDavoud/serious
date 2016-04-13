@@ -92,6 +92,7 @@ static int readData(int fd)
 
 ADCreader::ADCreader(uint8_t init1){
 	
+	rdch = init1;
 	ret = 0;
 	
 	//int no_tty = !isatty( fileno(stdout) );
@@ -176,7 +177,7 @@ void ADCreader::run()
 	running = true; 
 	while (running) {
 		
-	  	writeReg(fd,init1);
+	  	writeReg(fd,rd);
 	  	ret = gpio_poll(sysfs_fd,1000);
 	  	if (ret<1) {
 	    		fprintf(stderr,"Poll error %d\n",ret);
