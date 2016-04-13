@@ -35,7 +35,7 @@ Window::Window() : count(0)
 	// plot to the left of knob and thermometer
 	hLayout = new QHBoxLayout;
 	hLayout->addWidget(ch1b);
-	hLayout->addWidget(label)
+	hLayout->addWidget(label);
 	hLayout->addWidget(plot);
 
 	setLayout(hLayout);
