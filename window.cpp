@@ -59,7 +59,7 @@ Window::~Window() {
 
 void Window::timerEvent( QTimerEvent * )
 {
-	double inVal = opch(chnum,count);
+	double inVal = (opch(chnum,count)/32678-1)*2.5;
 	++count;
 
 	// add the new input to the plot
