@@ -22,6 +22,10 @@ public:
 	void quit();
 	void run();
 	int dat;
+	bool hasSample();
+	int getSample();
+	int buf[100];
+	int pointer;
 	
 	
 	int ret;
