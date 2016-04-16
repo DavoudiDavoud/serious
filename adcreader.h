@@ -25,7 +25,8 @@ public:
 	bool hasSample();
 	int getSample();
 	int buf[100];
-	int pointer;
+	int pointerR;
+	int pointerT;
 	
 	
 	int ret;
