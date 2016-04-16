@@ -59,14 +59,18 @@ Window::~Window() {
 
 void Window::timerEvent( QTimerEvent * )
 {
-	double inVal = (opch(chnum,count)/32678-1)*2.5;
-	++count;
+	while (hasSample()){
+		double inVal = (opch(chnum,count)/32678-1)*2.5;
+		++count;
 
-	// add the new input to the plot
-	memmove( yData, yData+1, (plotDataSize-1) * sizeof(double) );
-	yData[plotDataSize-1] = inVal;
-	curve->setSamples(xData, yData, plotDataSize);
-	plot->replot();
+		// add the new input to the plot
+		memmove( yData, yData+1, (plotDataSize-1) * sizeof(double) );
+		yData[plotDataSize-1] = inVal;
+		curve->setSamples(xData, yData, plotDataSize);
+		plot->replot();
+		
+	}
+	
 
 
 }
@@ -89,7 +93,7 @@ void Window::ch1bc(void){
 }
 
 double Window::opch(bool ch, int c){
-	return ((double) 1*(adcreader->dat));
+	return ((double) 1*(getSample()));
 	
 	
 }
