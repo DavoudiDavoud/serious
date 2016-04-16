@@ -81,6 +81,8 @@ static int readData(int fd)
 
 ADCreader::ADCreader(uint8_t init1){
 	
+	pointerR = 0;
+	pointerT = 0;
 	rdch = init1;
 	ret = 0;
 	
@@ -172,7 +174,11 @@ void ADCreader::run()
 	    		fprintf(stderr,"Poll error %d\n",ret);
 	    	}
 	  	// read the data register by performing two 8 bit reads
-	  	dat = readData(fd);
+	  	int value = readData(fd);
+	  	buf[pointerR] = value;
+	  	pointerR++;
+	  	pointerR = pointerR%100;
+	  	
 	  	
 	  
 	  
@@ -180,7 +186,18 @@ void ADCreader::run()
 
 
 }
-
+bool hasSample(){
+	if (pointerR == pointerT)
+		return false;
+	else
+		return true;
+}
+int getSample(){
+	int out = buf[pointerT];
+	pointerT++;
+	pointerT = pointerT%100;
+	return out;
+}
 void ADCreader::quit()
 {
 	running = false;
