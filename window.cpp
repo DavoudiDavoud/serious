@@ -59,7 +59,7 @@ Window::~Window() {
 
 void Window::timerEvent( QTimerEvent * )
 {
-	while (hasSample()){
+	while (adcreader->hasSample()){
 		double inVal = (opch(chnum,count)/32678-1)*2.5;
 		++count;
 
@@ -93,7 +93,7 @@ void Window::ch1bc(void){
 }
 
 double Window::opch(bool ch, int c){
-	return ((double) 1*(getSample()));
+	return ((double) 1*(adcreader->getSample()));
 	
 	
 }
