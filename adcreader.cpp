@@ -186,13 +186,13 @@ void ADCreader::run()
 
 
 }
-bool hasSample(){
+bool ADCreader::hasSample(){
 	if (pointerR == pointerT)
-		return false;
+		return 0;
 	else
-		return true;
+		return 1;
 }
-int getSample(){
+int ADCreader::getSample(){
 	int out = buf[pointerT];
 	pointerT++;
 	pointerT = pointerT%100;
